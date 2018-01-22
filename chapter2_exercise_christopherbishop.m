@@ -6,10 +6,7 @@
 % at the breakfast table 
 % 
 % written by IF 3/2007 % minor modifications 9/2011
-
-
-
-
+% checked over by IF 1/21/2018
 
 frosted='FROSTED FLAKES';
 cheerios='CHEERIOS';
@@ -19,9 +16,10 @@ frosted_scrambled=frosted;
 %question 2.1
 cheerios(1)='O'
 cheerios(5)='P'
-str='CHEMISTRY'
 
+str='CHEMISTRY'
 str([1 8])='OB'
+
 str1='MACARONI AND CHEESE'
 str1([3 14 8])='OOR'
 
@@ -97,7 +95,7 @@ vect8([10 12 9 12 8 4])
 %d. 
 vect8(1:2)
 %e. 
-vect8(vect(1:2))
+vect8(vect8(1:2)) % note that vect doesn't exist!
 %f.
 vect8(vect8)
 
