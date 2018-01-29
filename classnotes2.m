@@ -20,3 +20,4 @@ subplot(1,2,1)
 imagesc(squeeze(sad))
 happy=mean(brain(:,:,20,find(design)),4)
 axis equal
+

@@ -21,3 +21,6 @@ frosted_scrambled([6 13])=['F' 'F']
 disp(frosted_scrambled);
 
 ff=find('FROSTED FLAKES' == 'F')
+
+frosted(9)
+

@@ -95,8 +95,11 @@ time(end)
 stimlist='sshhhsshhshhsshh'
 % During trials 1-4 and 9-12 sad music was playing. During the other trials happy music was playing. 
 % b) Create two vectors, sadvect and happyvect that contain the trials when sad and happy music was playing, respectively. 
-sadvect=[1:4, 9:12];
+
 happyvect=[5:8, 13:15];
+happyvect=[5:8, 13:16];
+
+
 
 % At the end of the experiment, you end up with a string showing how the subject categorized the faces.
 
