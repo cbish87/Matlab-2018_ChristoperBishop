@@ -18,6 +18,7 @@ str1(11)='P'
 
 % b) Start with a string containing It’s pouring with rain and replace the p with an r and the r with a p.
 str2='It s pouring rain'
+str2='It''s pouring rain' % this is the weird way to deal with an apostrophe
 str2(6)='r'
 str2([9 14])='pp'
 
@@ -65,8 +66,13 @@ str(5:7)='r'
 % c) Demonstrate that the eight letter in the string is a 'z'
 disp(str(8))
 % d) Flip str so it is backwards (‘zxpzxpzxpzxpzrrrxpzx’). Hint (use 2.3c)
-fliplr(str)
+fliplr(str) % very clever, IF
+str(end:-1:1)
 % e) Demonstrate that the 6th, 13th and 17th letters in the reversed string are ‘pzx’.
+tmp=str(end:-1:1);
+tmp([6, 13, 17])
+% or 
+str(end-[5. 12, 16]) % IF, think about this
 
 %% Q 2.5: Indexing into vectors
  
@@ -89,20 +95,22 @@ time(end)
 stimlist='sshhhsshhshhsshh'
 % During trials 1-4 and 9-12 sad music was playing. During the other trials happy music was playing. 
 % b) Create two vectors, sadvect and happyvect that contain the trials when sad and happy music was playing, respectively. 
-sadvect=stimlist(1, 1:4)
-
-
-
+sadvect=[1:4, 9:12];
+happyvect=[5:8, 13:15];
 
 % At the end of the experiment, you end up with a string showing how the subject categorized the faces.
 
 resplist='ssshhhshsshhsssh';
 
 % c) Create strings stimlisthappy and resplisthappy that contain the values in stimlist and resplist when happy music was playing
+stimlisthappy=stimlist(happyvect);
+resplisthappy=resplist(happyvect);
+
 
 % d) Find out which stimulus was being presented on the 3rd happy music trial.
+stimlisthappy(3)
 
 % e) Find out which responses were made on the 3rd, 4th and 5th sad music trial.
-
-
+resplistsad=resplist(sadvect);
+resplistsad(3:5)
 
