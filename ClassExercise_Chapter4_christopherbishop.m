@@ -11,7 +11,7 @@ A = [1     1     1     1     1
  A(3:5, :)=2;
  A
 
-
+%m=ones([2,5]; 2*ones[3,5]);
 B = [1     1     0     0     1
      1     1     0     0     1
      1     1     0     0     1
@@ -20,7 +20,7 @@ B = [1     1     0     0     1
  B=ones(4, 5);
  B(:, 3:4)=0; 
  B
-
+% or B=zeroes(4, 5);  B(:,[1 2 5])= 1;
 
 C = [1     1     1     1     1
      1     0     0     1     1
@@ -41,7 +41,7 @@ D = [1     1     1     1     1
  for i=1:5 D(:, i)=[1 2 3 4 5]; 
  end
  D
-
+% D=repmat([1:5]', 1, 5) % or [1:5]'*ones(1,5)
 
 E = [2     2     2     2     2     2
      1     2     2     2     2     2
@@ -68,7 +68,7 @@ F=ones(5);
 for i=1:5 F(:, i)=(i-1)*5; 
 end
 F
-
+%look up reshape G=reshape(1:25, 5, 5); i for rows j for columns
 G = [1     6    11    16    21
      2     7    12    17    22
      3     8    13    18    23
@@ -108,7 +108,9 @@ I=zeros(8);
         end
     end
   end
-  I
+  
+  % another alternative J= zeros(8); for i=1:2:8  J(i,i)=1   end 
+  
 
 
  
@@ -182,6 +184,8 @@ end
 
 % b) Write a statement that is true if the variable 'x' is either less than 2 or greater than pi.
 x<2 || x>pi
+
+% find 
 
 % c) Write a statement that is true if either x is greater than 2 and y is less than 4, or if z is equal to zero.
 (x>2 && y<4) || z==0 
