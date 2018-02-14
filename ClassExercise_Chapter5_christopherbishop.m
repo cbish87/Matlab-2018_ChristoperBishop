@@ -1,5 +1,5 @@
 %% Questions for Chapter 5
- 
+% IF 2/14/2018 
 
 % see the word documet Exercises for chapter 5 for the images
 %% Q 5.1 Images of matrices
@@ -55,8 +55,6 @@ axis off
 
 %% Q 5.2 Making a moving sinusoidal grating with a color map
 
-
-
 % A moving sinusoidal grating is one of the classic stimuli of vision research.  
 % Just as a pure tone is a fundamental auditory stimulus, a moving grating is a fundamental stimulus for visual motion. 
 % This problem works through one way of making a moving grating.
@@ -89,19 +87,19 @@ colormap(cmap);
 
 % c) Make the grating move or ‘drift’ rightward by changing the phase in a loop, resetting the color map and using the ‘drawnow’ command. 
 % You can make the grating drift through 4 cycles over 100 frames by setting the phase with a loop like this:
-for phase = linspace(0,8*pi,100)     
-    for i=1:3 
-        cmap(:,i) = (sin(linspace(0,2*pi*nCycles,256)'-phase)+ 1)/2;     
-    end
-    colormap(cmap); 
-    drawnow end
-
 
 for phase = linspace(0,8*pi,100)
-	.
-	.
-	.
+    cmap = repmat((sin(linspace(0,2*pi*nCycles,256)'-phase)+ 1)/2, 256,3); 
+    colormap(cmap); 
+    drawnow
 end
+% 
+% 
+% for phase = linspace(0,8*pi,100)
+% 	.
+% 	.
+% 	.
+% end
 
 %% Q 5.3 Magic Letters 
 
@@ -135,6 +133,8 @@ axis off
 
 %% Q 5.4 Altering the rat random walk model 
 % I am gonna have to take some more time with this one 
+
+% OK BUT IT'S IMPORTANT TO DO IT SOON BECAUSE OTHER EXERCISES BUILD ON IT.
 %  Alter the tightrope walker model to do the following
 
 % a) She makes the steps more quickly. (See Hints if you get stuck.)
