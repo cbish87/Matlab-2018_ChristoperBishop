@@ -2,7 +2,8 @@
 %Fill in the missing bits of code to make the series of figures
 
 
-clear all?
+clear all
+close all
 flagsize=15;
 saltire=zeros(flagsize);
 
@@ -56,6 +57,8 @@ cmap(5, :)= [ 1 1 1];
 cmap(6, :)= [ 1 0 0];
 colormap(cmap);
 
+% this is fine, but Geoff will have shown you a more elegant way. Have a go
+% trying to implement it
 for i=1:flagsize
     for j=1:flagsize
         if i==j-1 | j==i-1 ... 
@@ -83,17 +86,21 @@ axis off; axis equal
 
 ntrials=30;
 durtrial=5*1000;
-timevec=0:2:durtrial*ntrials;
+timevec=0:2:(durtrial*ntrials);
 data=sin((2*pi* timevec)/(durtrial))+.1*randn(size(timevec));
 plot(timevec, data, '-')
 
 %a)  What is the mean response during all the data points that are within the first ½ second of every trial 
 
-plot(timevec(1,1:250), data(1,1:250), '-')
-mean(data(1,1:250))
+% so what you did was just the first 1/2 second of all 30 trials
+
+data_reshaped=reshape(data(1:end-1), 2500, 30);
+plot(timevec(1:250), data(:, 1:250), '.')
+mean(mean(data_reshaped(1:250, :)))
 %The mean is 0.3038
 
 %b) What is the mean response during the interval 2-2.5s of each trial?
+% so try fixing this
 
 plot(timevec(1,1000:1250), data(1,1000:1250), '-')
 mean(data(1,1000:1250))
@@ -101,17 +108,17 @@ mean(data(1,1000:1250))
 
 %c) during which timepoints does the EEG response have values greater than 0.9?
 
-dataC=data
-dataC(dataC<=0.9) = NaN
-plot(timevec(1,~isnan(dataC)), dataC(1,~isnan(dataC)))
+dataC=data;
+dataC(dataC<=0.9) = NaN;;
+plot(timevec(1,~isnan(dataC)), dataC(1,~isnan(dataC)), '.');
 %See plot
 
 %d) during which timepoints does the EEG response have values between 0.7 and 0.8?
 
-dataD=data
-dataD(dataD<=0.7) = NaN
-dataD(dataD>=0.8) = NaN
-plot(timevec(1,~isnan(dataD)), dataD(1,~isnan(dataD)))
+dataD=data;
+dataD(dataD<=0.7) = NaN;
+dataD(dataD>=0.8) = NaN;
+plot(timevec(1,~isnan(dataD)), dataD(1,~isnan(dataD)), '.');
 %See plot
 
 %(obviously you will get different answers each time because your data will vary each time).
@@ -119,7 +126,7 @@ plot(timevec(1,~isnan(dataD)), dataD(1,~isnan(dataD)))
 %5.3 Indexing into a matrix using real world co-ordinates
 %Sam Lin collects data on 70 rats. 20 of them were duds and their data were thrown away. 
 
-ratID=shuffle(1:70); ratID=sort(ratID(1:50)); 
+ratID=randperm(70); ratID=sort(ratID(1:50)); 
 
 %On the remaining rats he collects 10000 trials, and he calculates the % correct across each bin of 100 trials.
 
@@ -142,24 +149,46 @@ colormap(cmap)
 
 %b) change the colormap so that values above 90% are white and values below 10% are black.
 
-cmap = imcomplement(gray((64)))
+% need to actually change the cmap
+cmap = gray(100)
+cmap(1:10,:) = 0;
+cmap(91:100,:) = 100;
 colormap(cmap)
+colorbar;
 
 %c) how many rats performed above 66% correct between trials 6001-7001?
 
-perC = per
-perC(perC < 0.66) = NaN
-binsteps(binsteps<7001) = NaN
-binsteps(binsteps>6001) = NaN
-sum(sum(sum(perC(~isnan(perC)))))
+perC = per;
+perC(find(binsteps>7001), :) = NaN; % each bin has 100 trials and you need to put the Nans in perC
+perC(find(binsteps<6001), :) = NaN;
+imagesc(perC)
+tmp=nanmean(perC, 1);
+nrats=length(find(tmp>66));
 
-%249646
 
 %d) which rats were they?
 
-image(ratID, binsteps, perC)
+ratID(find(tmp>66))
+
 
 %e) How many trials would be needed for 40/50 rats to be performing above 80%.
+
+
+per80=per>80;
+numover80=sum(per80,2);
+minTover80=find(numover80>40);
+minTover80(1);
+binsteps(minTover80)
 %f) It turns out that for the rats with even ID numbers (2, 4, 6 10 etc.) 
 %the recording machine was on the blink for an interval between the 5678th trial 
 %and the 7533rd trial. Convert those numbers to NaN.
+badRats=find(mod(ratID,2)==0);
+per( 56:76, find(mod(ratID,2)==0))=NaN;
+
+figure(3)
+clf
+image(binsteps,size(ratID),per');
+colormap(gray(100));
+xlabel('Trial');
+ylabel('Rat');
+colorbar
