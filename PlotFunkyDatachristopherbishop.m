@@ -2,8 +2,8 @@ clear all
 
 
 %% load in data
-[~, headers]=xlsread('Psych315W18survey.xlsx', 'A1:AP1');
-[~, ~, data]=xlsread('Psych315W18survey.xlsx', 'A2:AP153');
+[~, headers]=xlsread('Psych315W18survey.csv', 'A1:AP1');
+[~, ~, data]=xlsread('Psych315W18survey.csv', 'A2:AP153');
 
 %% breakdown of computers by gender 
 gender_header=find(strcmp(headers,'gender'));

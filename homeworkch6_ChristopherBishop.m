@@ -13,7 +13,7 @@ aperture=NaN(size(radiusimage));
 aperture(radiusimage<radius)=1; 
 aperture(radiusimage>=radius)=0; 
 illusion=theta.*aperture; 
-illusion
+illusion;
 figure(1);
 imagesc(illusion); 
 axis square 

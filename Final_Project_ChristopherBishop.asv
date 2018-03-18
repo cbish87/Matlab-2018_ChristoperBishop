@@ -21,8 +21,7 @@ R_month_header=find(strcmp(headers_R,'month'));
 R_tv_header=find(strcmp(headers_R,'tv'));
 
 %Bothell Summed tv sales by month.
-monthstr={'Dec', 'Jan', 'Feb'};
-
+monthstr={'Dec
 
 B_Dec=(data_B(:, B_tv_header)),
 B_Dec_total=sum([B_Dec{find(strcmp(data_B(:, B_month_header),'Dec'))}]);
