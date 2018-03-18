@@ -159,12 +159,11 @@ colorbar;
 %c) how many rats performed above 66% correct between trials 6001-7001?
 
 perC = per;
-
- perC(find(binsteps>7001), :) = NaN; % each bin has 100 trials and you need to put the Nans in perC
- perC(find(binsteps<6001), :) = NaN;
- imagesc(perC)
- 
- nrats=length(find(tmp>66));
+perC(find(binsteps>7001), :) = NaN; % each bin has 100 trials and you need to put the Nans in perC
+perC(find(binsteps<6001), :) = NaN;
+imagesc(perC)
+tmp=nanmean(perC, 1);
+nrats=length(find(tmp>66));
 
 
 %d) which rats were they?
@@ -183,7 +182,7 @@ binsteps(minTover80)
 %f) It turns out that for the rats with even ID numbers (2, 4, 6 10 etc.) 
 %the recording machine was on the blink for an interval between the 5678th trial 
 %and the 7533rd trial. Convert those numbers to NaN.
-
+badRats=find(mod(ratID,2)==0);
 per( 56:76, find(mod(ratID,2)==0))=NaN;
 
 figure(3)
